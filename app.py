@@ -97,7 +97,7 @@ def extract_text(uploaded_file) -> str:
 # プロンプト生成
 # ──────────────────────────────────────────
 def build_prompt(rule_text: str, reality_memo: str) -> str:
-    kb_excerpt = KNOWLEDGE_BASE[:30000]
+    kb_excerpt = KNOWLEDGE_BASE[:10000]
     return f"""あなたは社会保険労務士の専門アシスタントです。
 キャリアアップ助成金（正社員化コース）の支給要領に精通しており、就業規則の問題点を発見・修正提案する専門家です。
 
@@ -213,7 +213,7 @@ if analyze_btn:
             # Windows環境でのエンコードエラー対策: bytes経由でUTF-8を保証
             prompt = prompt.encode("utf-8").decode("utf-8")
             response = client.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-2.5-flash",
                 contents=prompt,
             )
             result = response.text
